@@ -23,8 +23,7 @@ module RubyCrawler
     end
 
     def crawl
-      @spider = Spider.new
-      @spider.start_crawl
+      @spider = Spider.new.start_crawl
     end
 
     def stored

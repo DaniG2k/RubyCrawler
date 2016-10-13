@@ -6,7 +6,6 @@ describe RubyCrawler do
         conf.start_urls = ['http://mywebsite.com/']
         conf.include_patterns = [/mywebsite.com/]
         conf.exclude_patterns = []
-        conf.max_depth = 1
       end
 
       expect(RubyCrawler.configuration.polite?).to be true
@@ -26,6 +25,7 @@ describe RubyCrawler do
         conf.start_urls = start_list
         conf.include_patterns = [/asia-gazette.com/]
         conf.exclude_patterns = []
+        conf.max_depth = 1
       end
 
       RubyCrawler.crawl
