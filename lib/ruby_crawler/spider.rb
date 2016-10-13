@@ -5,7 +5,6 @@ module RubyCrawler
     def initialize
       @stored = []
       @frontier = []
-      @invalid = []
     end
 
     def start_crawl
@@ -24,6 +23,9 @@ module RubyCrawler
         html_doc = ::Nokogiri::HTML(open(url))
 
         links = html_doc.xpath('//a[@href]').map do |link|
+          # TODO
+          # This is incorrectly appending urls form different domains.
+          # Needs fix
           URI.join(url, link['href']).to_s
         end
 
@@ -47,6 +49,8 @@ module RubyCrawler
         @stored << url
       rescue URI::InvalidURIError
         puts "Invalid url: #{url}"
+      rescue OpenURI::HTTPError
+
       end
     end
   end

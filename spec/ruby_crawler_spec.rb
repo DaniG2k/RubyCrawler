@@ -12,7 +12,6 @@ describe RubyCrawler do
       expect(RubyCrawler.configuration.start_urls).to eq(['http://mywebsite.com/'])
       expect(RubyCrawler.configuration.include_patterns).to eq([/mywebsite.com/])
       expect(RubyCrawler.configuration.exclude_patterns).to eq([])
-      expect(RubyCrawler.configuration.max_depth).to eq(1)
     end
   end
 
@@ -25,7 +24,6 @@ describe RubyCrawler do
         conf.start_urls = start_list
         conf.include_patterns = [/asia-gazette.com/]
         conf.exclude_patterns = []
-        conf.max_depth = 1
       end
 
       RubyCrawler.crawl

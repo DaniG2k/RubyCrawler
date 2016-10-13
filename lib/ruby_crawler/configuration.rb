@@ -11,7 +11,7 @@ module RubyCrawler
       @start_urls = []
       @include_patterns = []
       @exclude_patterns = []
-      @max_depth = nil
+      #@max_depth = nil
     end
 
     def polite?
