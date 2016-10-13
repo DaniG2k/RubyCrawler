@@ -14,4 +14,17 @@ describe RubyCrawler do
       expect(RubyCrawler.configuration.exclude_patterns).to eq([])
     end
   end
+
+  context 'spider' do
+    it 'crawls a series of urls given a start url and include pattern' do
+      RubyCrawler.configure do |conf|
+        conf.polite = true
+        conf.start_urls = ['https://asia-gazette.com/']
+        conf.include_patterns = [/asia-gazette.com/]
+        conf.exclude_patterns = []
+      end
+
+      RubyCrawler.crawl
+    end
+  end
 end
