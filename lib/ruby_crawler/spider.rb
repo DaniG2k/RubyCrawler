@@ -29,6 +29,8 @@ module RubyCrawler
           end
         end
 
+        # Append to stored list.
+        @stored << url
       end
     end
   end
