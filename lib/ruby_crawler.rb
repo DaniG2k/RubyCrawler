@@ -5,17 +5,17 @@ require 'pry'
 module RubyCrawler
   class << self
     attr_accessor :configuration
-  end
-  
-  def self.configuration
-    @configuration ||= Configuration.new
-  end
 
-  def self.reset
-    @configuration = Configuration.new
-  end
+    def configuration
+      @configuration ||= Configuration.new
+    end
 
-  def self.configure
-    yield(configuration)
+    def reset
+      @configuration = Configuration.new
+    end
+
+    def configure
+      yield(configuration)
+    end
   end
 end
