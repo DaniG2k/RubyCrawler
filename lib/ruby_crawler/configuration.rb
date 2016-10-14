@@ -1,17 +1,15 @@
 module RubyCrawler
   class Configuration
-    attr_accessor :polite,
-      :start_urls,
+    attr_writer :polite
+    attr_accessor :start_urls,
       :include_patterns,
-      :exclude_patterns,
-      :max_depth
+      :exclude_patterns
 
     def initialize
       @polite = true
       @start_urls = []
       @include_patterns = []
       @exclude_patterns = []
-      #@max_depth = nil
     end
 
     def polite?

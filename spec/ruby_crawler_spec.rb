@@ -18,7 +18,6 @@ describe RubyCrawler do
   context 'spider' do
     it 'crawls a series of urls given a start url and include pattern' do
       start_list = ['https://asia-gazette.com/']
-
       RubyCrawler.configure do |conf|
         conf.polite = true
         conf.start_urls = start_list
