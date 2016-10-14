@@ -17,17 +17,17 @@ describe RubyCrawler do
 
   context 'spider' do
     it 'crawls a series of urls given a start url and include pattern' do
-      start_list = ['https://asia-gazette.com/']
+      start_list = ['https://gocardless.com/']
       RubyCrawler.configure do |conf|
         conf.polite = true
         conf.start_urls = start_list
-        conf.include_patterns = [/asia-gazette\.com/]
+        conf.include_patterns = [/https:\/\/gocardless\.com/]
         conf.exclude_patterns = []
       end
 
       RubyCrawler.crawl
 
-      expect(RubyCrawler.stored).to eq(start_list)
+      expect(RubyCrawler::Spider.stored).to eq(start_list)
     end
   end
 end

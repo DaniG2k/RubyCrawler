@@ -1,10 +1,13 @@
 module RubyCrawler
   class Spider
-    attr_accessor :stored, :frontier
 
     def initialize
       @stored = []
       @frontier = []
+    end
+
+    def self.stored
+      @stored
     end
 
     def start_crawl
@@ -25,7 +28,7 @@ module RubyCrawler
 
         links = html_doc.xpath('//a[@href]').map do |link|
           url = URI.join(url, link['href']).to_s
-          if is_relative?(url) || matches_include_patterns?(url) || !matches_exclude_patterns?(url)
+          if is_relative?(url) || (matches_include_patterns?(url) && !matches_exclude_patterns?(url))
             url
           end
         end
@@ -37,11 +40,13 @@ module RubyCrawler
         end
 
         @frontier.uniq!
-        puts "Stored:\n#{@stored}"
+        puts "Stored:\n#{@stored}\n"
         #puts "Frontier:\n#{@frontier}"
         #sleep 5
       rescue URI::InvalidURIError => e
         puts "Invalid url: #{url}\n#{e}"
+      rescue Exception => e
+        puts e.message
       end
     end
 

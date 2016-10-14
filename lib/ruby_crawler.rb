@@ -26,8 +26,8 @@ module RubyCrawler
       @spider = Spider.new.start_crawl
     end
 
-    def stored
-      @spider.stored
-    end
+    # def stored
+    #   @spider.stored
+    # end
   end
 end
