@@ -6,7 +6,7 @@ module RubyCrawler
       @frontier = []
     end
 
-    def self.stored
+    def stored
       @stored
     end
 
@@ -41,8 +41,6 @@ module RubyCrawler
 
         @frontier.uniq!
         puts "Stored:\n#{@stored}\n"
-        #puts "Frontier:\n#{@frontier}"
-        #sleep 5
       rescue URI::InvalidURIError => e
         puts "Invalid url: #{url}\n#{e}"
       rescue Exception => e
