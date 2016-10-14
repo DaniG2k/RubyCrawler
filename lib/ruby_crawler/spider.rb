@@ -35,13 +35,13 @@ module RubyCrawler
             @frontier << link
           end
         end
+
         @frontier.uniq!
         puts "Stored:\n#{@stored}"
         #puts "Frontier:\n#{@frontier}"
         #sleep 5
       rescue URI::InvalidURIError => e
         puts "Invalid url: #{url}\n#{e}"
-      #rescue OpenURI::HTTPError
       end
     end
 
