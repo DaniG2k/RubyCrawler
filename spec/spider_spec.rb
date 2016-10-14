@@ -18,7 +18,7 @@ describe RubyCrawler::Spider do
         conf.polite = true
         conf.start_urls = ['http://mywebsite.com/']
         conf.include_patterns = [/mywebsite\.com/]
-        conf.exclude_patterns = []
+        conf.exclude_patterns = [/my\-page/]
       end
     end
 
@@ -30,16 +30,25 @@ describe RubyCrawler::Spider do
     end
 
     it '#matches_include_patterns? returns false when there is not a match' do
-      RubyCrawler.configure do |conf|
-        conf.polite = true
-        conf.start_urls = ['http://mywebsite.com/']
-        conf.include_patterns = [/mywebsite\.com/]
-        conf.exclude_patterns = []
-      end
       spider = RubyCrawler::Spider.new
       mypage = 'asahi.com/my-page'
 
       expect(spider.matches_include_patterns?(mypage)).to be false
     end
+
+    it '#matches_exclude_patterns? returns true when there is a match' do
+      spider = RubyCrawler::Spider.new
+      mypage = 'mywebsite.com/my-page'
+
+      expect(spider.matches_exclude_patterns?(mypage)).to be true
+    end
+
+    it '#matches_exclude_patterns? returns false when there is not a match' do
+      spider = RubyCrawler::Spider.new
+      mypage = 'asahi.com/'
+
+      expect(spider.matches_exclude_patterns?(mypage)).to be false
+    end
+
   end
 end

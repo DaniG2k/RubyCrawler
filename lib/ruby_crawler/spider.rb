@@ -25,15 +25,9 @@ module RubyCrawler
 
         links = html_doc.xpath('//a[@href]').map do |link|
           url = URI.join(url, link['href']).to_s
-          if is_relative?(url) || matches_include_patterns?(url)
+          if is_relative?(url) || matches_include_patterns?(url) || !matches_exclude_patterns?(url)
             url
           end
-        end
-
-        links.reject! do |link|
-          RubyCrawler.configuration.exclude_patterns.any? do |pat|
-            !(link =~ pat).nil?
-          end || !(link =~ /\#$/).nil?
         end
 
         links.each do |link|
@@ -57,6 +51,12 @@ module RubyCrawler
 
     def matches_include_patterns?(url)
       RubyCrawler.configuration.include_patterns.any? do |pat|
+        !(url =~ pat).nil?
+      end
+    end
+
+    def matches_exclude_patterns?(url)
+      RubyCrawler.configuration.exclude_patterns.any? do |pat|
         !(url =~ pat).nil?
       end
     end
