@@ -1,9 +1,9 @@
 module RubyCrawler
   class Configuration
-    attr_writer :polite
     attr_accessor :start_urls,
       :include_patterns,
       :exclude_patterns
+    attr_writer :polite
 
     def initialize
       @polite = true
