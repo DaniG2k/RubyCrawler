@@ -22,22 +22,28 @@ module RubyCrawler
 
         parse_line = false
         rules.each do |line|
-          if !(line =~ /User\-agent:\s+\*/).nil?
-            parse_line = true
+          # Switch to parse / not parse:
+          if !(line =~ /User\-agent/).nil?
+            if !(line =~ /User\-agent:\s+\*/).nil?
+              parse_line = true
+            else
+              parse_line = false
+            end
+          # Append to include patterns:
           elsif parse_line && !(line =~ /Allow/).nil?
             allowed = Regexp.new(line.gsub(/Allow:\s+/,''))
             unless RubyCrawler.configuration.include_patterns.include?(allowed)
               RubyCrawler.configuration.include_patterns << allowed
             end
+          # Append to exclude patterns:
           elsif parse_line && !(line =~ /Disallow/).nil?
             disallowed = Regexp.new(line.gsub(/Disallow:\s+/,''))
             unless RubyCrawler.configuration.exclude_patterns.include?(disallowed)
               RubyCrawler.configuration.exclude_patterns << disallowed
             end
-          elsif (line =~ /User\-agent:\s+\*/).nil?
-            parse_line = false
           end
         end
+
       end
     end
 
@@ -73,7 +79,7 @@ module RubyCrawler
             @frontier << link
           end
         end
-        puts "Stored:\n#{@stored}\n"
+        #puts "Stored:\n#{@stored}\n"
       rescue URI::InvalidURIError => e
         puts "Invalid url: #{url}\n#{e}"
       rescue Exception => e
