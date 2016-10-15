@@ -53,7 +53,7 @@ describe RubyCrawler do
         /\/oauth\//,
         /\/health_check\//,
         /\/api\//]
-      RubyCrawler::Spider.new.parse_robots
+      RubyCrawler::Spider.new.parse_robots_txt
 
       expect(RubyCrawler.configuration.exclude_patterns).to eq(expected)
     end
