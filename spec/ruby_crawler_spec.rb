@@ -16,8 +16,16 @@ describe RubyCrawler do
   end
 
   context 'spider' do
+    before :all do
+      RubyCrawler.configure do |conf|
+        conf.polite = true
+        conf.start_urls = ['https://gocardless.com/']
+        conf.include_patterns = [/https:\/\/gocardless\.com/]
+        conf.exclude_patterns = []
+      end
+    end
+
     it 'crawls a series of urls given a start url and include pattern' do
-      start_list = ['https://gocardless.com/']
       stored = %w(https://gocardless.com/
                   https://gocardless.com/features/
                   https://gocardless.com/pricing/
@@ -31,17 +39,24 @@ describe RubyCrawler do
                   https://gocardless.com/telcos/
                   https://gocardless.com/utilities/)
 
-      RubyCrawler.configure do |conf|
-        conf.polite = true
-        conf.start_urls = start_list
-        conf.include_patterns = [/https:\/\/gocardless\.com/]
-        conf.exclude_patterns = []
-      end
-
       RubyCrawler.crawl
 
-      #expect(RubyCrawler.stored).to eq(stored)
+      expect(RubyCrawler.stored).to eq(stored)
       expect(RubyCrawler.stored.size).to eq(12)
     end
+
+    it "#parse_robots_txt takes into account a website's robots.txt file" do
+      expected = [/\/connect\//,
+        /\/pay\//,
+        /\/merchants\//,
+        /\/users\//,
+        /\/oauth\//,
+        /\/health_check\//,
+        /\/api\//]
+      RubyCrawler::Spider.new.parse_robots
+
+      expect(RubyCrawler.configuration.exclude_patterns).to eq(expected)
+    end
+
   end
 end
