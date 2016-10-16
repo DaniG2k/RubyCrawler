@@ -4,10 +4,15 @@ module RubyCrawler
     def initialize
       @stored = []
       @frontier = []
+      @assets = {}
     end
 
     def stored
       @stored
+    end
+
+    def assets
+      @assets
     end
 
     def parse_robots_txt
@@ -66,6 +71,13 @@ module RubyCrawler
     def parse_page(url)
       begin
         html_doc = ::Nokogiri::HTML(open(url))
+
+        # Gather static assets in the @assets hash.
+        @assets[url] = {
+          :css => html_doc.css('link[rel=stylesheet]').map {|css| URI.join(url, css['href']).to_s },
+          :images => html_doc.xpath("//img/@src").map {|img| URI.join(url, img).to_s },
+          :javascript => html_doc.css('script').map {|js| src = js['src']; src.to_s unless src.nil?}.compact
+        }
 
         links = html_doc.xpath('//a[@href]').map do |link|
           url = URI.join(url, link['href']).to_s

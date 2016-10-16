@@ -51,4 +51,39 @@ describe RubyCrawler::Spider do
     end
 
   end
+
+  it "extracts a page's static assets" do
+    RubyCrawler.reset
+    RubyCrawler.configure do |conf|
+      conf.start_urls = ['https://gocardless.com/']
+      conf.include_patterns = [/https:\/\/gocardless\.com$/]
+    end
+
+    spider = RubyCrawler.crawl
+    assets = {"https://gocardless.com/"=>
+              {:css=>["https://gocardless.com/bundle/main-0d7cb6738d59e4c22838.css"],
+               :images=>
+                ["https://gocardless.com/images/logos/pro-logos@2x.png",
+                 "https://gocardless.com/images/logos/funding-circle-logo-white.png",
+                 "https://gocardless.com/images/flags/GB-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/AU-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/BE-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/BE-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/BR-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/CA-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/DE-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/ES-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/EU-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/FR-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/IE-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/NL-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/NZ-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/SE-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/US-flag-icon@2x.png",
+                 "https://gocardless.com/images/flags/GB-flag-icon@2x.png"],
+               :javascript=>
+                ["//www.googletagmanager.com/gtm.js?id=GTM-PRFKNC",
+                 "/bundle/main-0d7cb6738d59e4c22838.js"]}}
+    expect(RubyCrawler.assets).to eq(assets)
+  end
 end

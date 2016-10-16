@@ -30,5 +30,9 @@ module RubyCrawler
     def stored
       @spider.stored
     end
+
+    def assets
+      @spider.assets
+    end
   end
 end
