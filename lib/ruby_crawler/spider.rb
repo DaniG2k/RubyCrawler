@@ -28,6 +28,7 @@ module RubyCrawler
       until @frontier.empty?
         url = @frontier.shift
         @stored << url
+        puts "Stored: #{url}\n"
         parse_page(url)
       end
     end
@@ -55,7 +56,6 @@ module RubyCrawler
             @frontier << link
           end
         end
-        #puts "Stored:\n#{@stored}\n"
       rescue URI::InvalidURIError => e
         puts "Invalid url: #{url}\n#{e}"
       rescue Exception => e
