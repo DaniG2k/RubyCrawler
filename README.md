@@ -1,8 +1,6 @@
 # RubyCrawler
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ruby_crawler`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to RubyCrawler, a simple web crawler written in Ruby!
 
 ## Installation
 
@@ -22,7 +20,51 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Require the gem:
+
+```ruby
+require 'ruby_crawler'
+```
+
+Configure the start urls and the include/exclude patterns:
+
+```ruby
+RubyCrawler.configure do |conf|
+  conf.start_urls = ['https://gocardless.com/']
+  conf.include_patterns = [/https:\/\/gocardless\.com/]
+  conf.exclude_patterns = []
+end
+```
+
+Then kick off a crawl:
+
+```ruby
+RubyCrawler.crawl
+```
+
+By default, RubyCrawler is polite (i.e. it respects a website's robots.txt file). However, you can change this by setting:
+
+```ruby
+RubyCrawler.configure do |conf|
+  conf.polite = false
+end
+```
+
+When you kick off a new crawl, you will see the include and exclude patterns change accordingly.
+
+## Sitemap & Assets
+
+To see the sitemap (i.e. stored urls), you can simply type:
+
+```ruby
+RubyCrawler.stored
+```
+
+whereas to view the assets (css|img|js) on the crawled pages, you can simply run:
+
+```ruby
+RubyCrawler.assets
+```
 
 ## Development
 
@@ -32,5 +74,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ruby_crawler.
+Bug reports and pull requests are welcome on GitHub at https://github.com/DaniG2k/ruby_crawler.
 
