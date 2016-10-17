@@ -40,7 +40,8 @@ module RubyCrawler
         # Disregard the page if it includes a meta robots tag with a
         # noindex directive.
         if RubyCrawler.configuration.polite? && html_doc.xpath('//meta[@name="robots"]/@content').map(&:value).any? {|elt| elt.include?('noindex')}
-          # Remove last url and pass.
+          puts "Noindex meta-tag detected. Removing #{url}"
+          # Remove last url.
           @stored.pop
         else
           # Gather static assets in the @assets hash.
