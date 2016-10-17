@@ -4,6 +4,7 @@ require 'pry'
 
 require 'ruby_crawler/version'
 require 'ruby_crawler/configuration'
+require 'ruby_crawler/robots_parser'
 require 'ruby_crawler/spider'
 
 module RubyCrawler
