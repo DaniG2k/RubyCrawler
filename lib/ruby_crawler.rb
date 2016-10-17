@@ -1,6 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
-require 'pry'
+#require 'pry'
 
 require 'ruby_crawler/version'
 require 'ruby_crawler/configuration'
