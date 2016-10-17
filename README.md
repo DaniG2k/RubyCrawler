@@ -6,7 +6,7 @@ Welcome to RubyCrawler, a simple web crawler written in Ruby! 😀
 
 Clone this repo:
 
-    $ git clone https://github.com/DaniG2k/RubyCrawler.git
+    $ git clone https://github.com/DaniG2k/RubyCrawler.git ruby_crawler
     $ cd ruby_crawler
 
 Install the dependencies:
