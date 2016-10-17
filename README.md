@@ -36,6 +36,8 @@ RubyCrawler.configure do |conf|
 end
 ```
 
+Include and exclude patterns must both take arrays of regular expressions.
+
 Then kick off a crawl:
 
 ```ruby
@@ -52,24 +54,37 @@ end
 
 When you kick off a new crawl, you will see the include and exclude patterns change accordingly.
 
-To reset the RubyCrawler, simply execute:
-
-```ruby
-RubyCrawler.reset
-```
-
 ## Sitemap & Assets
 
 To see the sitemap (i.e. stored urls), just type:
 
 ```ruby
 RubyCrawler.stored
+#  =>
+#  ["https://gocardless.com/",
+#   "https://gocardless.com/features/",
+#   "https://gocardless.com/pricing/",
+#   "https://gocardless.com/accountants/",
+#   "https://gocardless.com/charities/",
+#   "https://gocardless.com/agencies/",
+#   "https://gocardless.com/education/",
+#   "https://gocardless.com/finance/",
+#   "https://gocardless.com/local-government/",
+#   "https://gocardless.com/saas/",
+#   "https://gocardless.com/telcos/",
+#   "https://gocardless.com/utilities/"]
 ```
 
 whereas to view the assets (css|img|js) on the crawled pages, you can run:
 
 ```ruby
 RubyCrawler.assets
+```
+
+To reset the RubyCrawler's configuration, simply execute:
+
+```ruby
+RubyCrawler.reset
 ```
 
 ## TODO and Issues
