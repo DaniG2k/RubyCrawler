@@ -9,7 +9,7 @@ require 'ruby_crawler/spider'
 
 module RubyCrawler
   class << self
-    attr_accessor :configuration, :spider
+    attr_accessor :configuration
 
     def configuration
       @configuration ||= Configuration.new
