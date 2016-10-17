@@ -37,6 +37,16 @@ end
 
 Include and exclude patterns must both take arrays of regular expressions.
 
+If you want to see all the urls under the gocardless.com domain, then change the include pattern to:
+
+```ruby
+RuyCrawler.configure do |conf|
+  conf.include_patterns = [/gocardless\.com/]
+end
+```
+
+This will match more subdomains such as https://blog.gocardless.com/.
+
 Then kick off a crawl:
 
 ```ruby
@@ -74,7 +84,7 @@ RubyCrawler.stored
 #   "https://gocardless.com/utilities/"]
 ```
 
-whereas to view the assets (css|img|js) on the crawled pages, you can run:
+To view the assets (css|img|js) on the crawled pages, you can run:
 
 ```ruby
 RubyCrawler.assets
