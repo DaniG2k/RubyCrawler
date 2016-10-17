@@ -1,4 +1,4 @@
-# RubyCrawler
+# RubyCrawleri 🕷
 
 Welcome to RubyCrawler, a simple web crawler written in Ruby! 😀
 
