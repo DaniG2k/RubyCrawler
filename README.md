@@ -1,6 +1,6 @@
 # RubyCrawler
 
-Welcome to RubyCrawler, a simple web crawler written in Ruby!
+Welcome to RubyCrawler, a simple web crawler written in Ruby! 😀
 
 ## Installation
 
