@@ -89,7 +89,6 @@ RubyCrawler.reset
 
 ## TODO and Issues
 
-* Once a crawl kicks off for a very large website, Ctrl+c does not halt the crawl.
 * Currently no flushing of stored urls or assets to a dataabse. Everythign is in in-memory.
 * Politeness doesn't take into account meta tags with noindex.
 * Canonical links in page source not taken into account.
