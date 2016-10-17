@@ -89,9 +89,9 @@ RubyCrawler.reset
 
 ## TODO and Issues
 
-* Currently no flushing of stored urls or assets to a dataabse. Everythign is in in-memory.
+* Currently no flushing of stored urls or assets to a dataabse. Everythign is in-memory.
 * Canonical links in page source not taken into account.
-* Current only a global configuration is supported, although it would be possible to implement on a per-spider basis.
+* Current, only a global configuration is supported, although it would be possible to implement configuration on a per-spider basis.
 
 ## Development
 
