@@ -52,19 +52,33 @@ end
 
 When you kick off a new crawl, you will see the include and exclude patterns change accordingly.
 
+To reset the RubyCrawler, simply execute:
+
+```ruby
+RubyCrawler.reset
+```
+
 ## Sitemap & Assets
 
-To see the sitemap (i.e. stored urls), you can simply type:
+To see the sitemap (i.e. stored urls), just type:
 
 ```ruby
 RubyCrawler.stored
 ```
 
-whereas to view the assets (css|img|js) on the crawled pages, you can simply run:
+whereas to view the assets (css|img|js) on the crawled pages, you can run:
 
 ```ruby
 RubyCrawler.assets
 ```
+
+## TODO and Issues
+
+* Once a crawl kicks off for a very large website, Ctrl+c does not halt the crawl.
+* Currently no flushing of stored urls or assets to a dataabse. Everythign is in in-memory.
+* Politeness doesn't take into account meta tags with noindex.
+* Canonical links in page source not taken into account.
+* Current only a global configuration is supported, although it would be possible to implement on a per-spider basis.
 
 ## Development
 
