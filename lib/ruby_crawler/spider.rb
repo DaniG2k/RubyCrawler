@@ -51,14 +51,14 @@ module RubyCrawler
           end
         end
 
-        links.each do |link|
-          if !link.nil? && !@frontier.include?(link) && !@stored.include?(link)
+        links.compact.each do |link|
+          if !@frontier.include?(link) && !@stored.include?(link)
             @frontier << link
           end
         end
       rescue URI::InvalidURIError => e
         puts "Invalid url: #{url}\n#{e}"
-      rescue Exception => e
+      rescue StandardError => e
         puts e.message
       end
     end
