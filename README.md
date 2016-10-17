@@ -4,19 +4,18 @@ Welcome to RubyCrawler, a simple web crawler written in Ruby! 😀
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Clone this repo:
 
-```ruby
-gem 'ruby_crawler'
-```
+    $ git clone https://github.com/DaniG2k/RubyCrawler.git
+    $ cd ruby_crawler
 
-And then execute:
+Install the dependencies:
 
-    $ bundle
+    $ bundle install
 
-Or install it yourself as:
+And install the gem itself:
 
-    $ gem install ruby_crawler
+    $ rake install
 
 ## Usage
 
