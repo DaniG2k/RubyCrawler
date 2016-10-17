@@ -18,10 +18,8 @@ describe RubyCrawler do
   context 'spider' do
     before do
       RubyCrawler.configure do |conf|
-        conf.polite = true
         conf.start_urls = ['https://gocardless.com/']
         conf.include_patterns = [/https:\/\/gocardless\.com/]
-        conf.exclude_patterns = []
       end
     end
 

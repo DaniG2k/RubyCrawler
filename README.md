@@ -90,7 +90,6 @@ RubyCrawler.reset
 ## TODO and Issues
 
 * Currently no flushing of stored urls or assets to a dataabse. Everythign is in in-memory.
-* Politeness doesn't take into account meta tags with noindex.
 * Canonical links in page source not taken into account.
 * Current only a global configuration is supported, although it would be possible to implement on a per-spider basis.
 
@@ -103,4 +102,3 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/DaniG2k/ruby_crawler.
-

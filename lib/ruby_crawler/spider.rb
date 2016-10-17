@@ -37,23 +37,30 @@ module RubyCrawler
       begin
         html_doc = ::Nokogiri::HTML(open(url))
 
-        # Gather static assets in the @assets hash.
-        @assets[url] = {
-          :css => html_doc.css('link[rel=stylesheet]').map {|css| URI.join(url, css['href']).to_s },
-          :images => html_doc.xpath("//img/@src").map {|img| URI.join(url, img).to_s },
-          :javascript => html_doc.css('script').map {|js| src = js['src']; src.to_s unless src.nil?}.compact
-        }
+        # Disregard the page if it includes a meta robots tag with a
+        # noindex directive.
+        if RubyCrawler.configuration.polite? && html_doc.xpath('//meta[@name="robots"]/@content').map(&:value).any? {|elt| elt.include?('noindex')}
+          # Remove last url and pass.
+          @stored.pop
+        else
+          # Gather static assets in the @assets hash.
+          @assets[url] = {
+            :css => html_doc.css('link[rel=stylesheet]').map {|css| URI.join(url, css['href']).to_s },
+            :images => html_doc.xpath("//img/@src").map {|img| URI.join(url, img).to_s },
+            :javascript => html_doc.css('script').map {|js| src = js['src']; src.to_s unless src.nil?}.compact
+          }
 
-        links = html_doc.xpath('//a[@href]').map do |link|
-          url = URI.join(url, link['href']).to_s
-          if is_relative?(url) || (matches_include_patterns?(url) && !matches_exclude_patterns?(url))
-            url
+          links = html_doc.xpath('//a[@href]').map do |link|
+            url = URI.join(url, link['href']).to_s
+            if is_relative?(url) || (matches_include_patterns?(url) && !matches_exclude_patterns?(url))
+              url
+            end
           end
-        end
 
-        links.compact.each do |link|
-          if !@frontier.include?(link) && !@stored.include?(link)
-            @frontier << link
+          links.compact.each do |link|
+            if !@frontier.include?(link) && !@stored.include?(link)
+              @frontier << link
+            end
           end
         end
       rescue URI::InvalidURIError => e
