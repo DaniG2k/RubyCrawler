@@ -53,7 +53,7 @@ module RubyCrawler
 
           links = html_doc.xpath('//a[@href]').map do |link|
             url = URI.join(url, link['href']).to_s
-            if is_relative?(url) || (matches_include_patterns?(url) && !matches_exclude_patterns?(url))
+            if is_relative?(url) || matches_include_exclude_rules
               url
             end
           end
@@ -71,10 +71,14 @@ module RubyCrawler
       end
     end
 
+    def matches_include_exclude_rules
+      matches_include_patterns?(url) && !matches_exclude_patterns?(url)
+    end
+
     def is_relative?(url)
       !(url =~ /^\//).nil?
     end
-
+    
     def matches_include_patterns?(url)
       RubyCrawler.configuration.include_patterns.any? do |pat|
         !(url =~ pat).nil?
